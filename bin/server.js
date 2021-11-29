@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
   });
   
 
-const newLocal = 3000;
-  app.listen(newLocal, () => console.log('Example app is listening on port 3000.'));
+const newLocal = 8080;
+  app.listen(newLocal, () => console.log('Example app is listening on port 8080.'));
 
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
