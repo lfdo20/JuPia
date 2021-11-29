@@ -1,0 +1,51 @@
+{
+	"dados": {
+		"nome": "",
+		"idade": "",
+		"modulo": ""
+	},
+	"atendimento": {
+		"turno": "",
+		"primeiroAtmCheck": "",
+		"entrevista": false
+	},
+	"familia": {
+		"famParentesco": "",
+		"famTel": "",
+		"famObs": ""
+	},
+	"saude": {
+		"dor": "",
+		"doenca": "",
+		"machucado": "",
+		"remedio": "",
+		"semDDMCheck": false,
+		"gesauCheck": false
+	},
+	"convivencia": {
+		"posneg": "",
+		"positivaMas": "",
+		"negativaObs": "",
+		"gesegCheck": false
+	},
+	"visita": {
+		"recebida": "",
+		"visitaquem": "",
+		"fatoVisita": "",
+		"contatosimnao": "",
+		"contatomeio": "",
+		"contatoquem": ""
+	},
+	"escolar": {
+	
+	},
+	"tema": {
+		"semana": ""
+	},
+	"infracao": {
+	
+	},
+	"ocorrencias": {
+	
+	}
+}

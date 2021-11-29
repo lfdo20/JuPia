@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+2|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+
+#all {
+	display: flex;
+	flex-flow: column;
+}
+
+#sipia {
+  text-align: center;
+  font-size: 48pt;
+  font-family: 'Sigmar One', cursive;
+  padding: 10px;
+}
+
+#inputo {
+  padding: auto;
+}
+
+textarea {
+	width: 580px;
+}
+
+input.convivencia{
+	vertical-align: top;
+	}
+label.dados{
+	display: inline-block;
+	margin: 0px 4px 0px 6px;
+}
+label.saude:not(.ok){
+	display: inline-block;
+	margin: 0px 4px 0px 6px;
+	width: 100px;
+}
+	
+label.convivencia {
+	display: inline-block;
+	margin: 0px 4px 0px 6px;
+	vertical-align: top;
+	width: 120px;
+}
+label.visita{
+	display: inline-block;
+	margin: 0px 4px 0px 4px;
+	vertical-align: top;
+	width: 240px;
+}
+label.flv2 {
+	width: 120px;
+}
+.labelLigacao {
+	display: inline-block;
+	vertical-align: top;
+	width: 150px;
+}
+label.entrevista {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0px 4px 0px 6px;
+	width: 150px;
+}
+.flv1 {
+	margin: 0px 0px 0px 26px;
+}
+.flv3 {
+	margin: 0px 0px 0px 52px;
+}
+
+#formDados {
+	background: #E3EEDD;
+}
+.ttl1 {
+	background: #B1DE9B;
+}
+#formSaude {
+	background: #DDEEEB;
+}
+.ttl2{
+	background: #A2E0D4;
+}
+#formConvivencia{
+	background: #EDEEDD;
+}
+.ttl3{
+	background: #E7EABF;
+}
+#formFamilia{
+	background: #D9D5F6;
+}
+.ttl4{
+	background: #DEBAC6;
+}
+#formVisita {
+	background: #EEDDE3;
+}
+.ttl5 {
+	background: #AEA9D6;
+}
+	
+form {
+	padding: 8px;
+}
+
+.formline {
+	padding: 2px;
+}
+	
+.collapse {
+  border: solid 0px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  transition: background-color 0.25s;
+  will-change: background-color;
+}
+
+.title {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 2px;
+  position: relative;
+
+  &: after {
+    position: absolute;
+    right: 2px;
+    transform: translateY(-50%);
+    top: 50%;
+  }
+}
+
+#inputa {
+  display: block;
+  margin: auto;
+	
+  /* background-color: red; */
+  height: 250px;
+  width: 800px;
+}
+
+#outputa {
+  display: block;
+  margin: auto;
+	
+  /* background-color: red; */
+  height: 250px;
+  width: 800px;
+}
+
+#selector {
+	display: block;
+	
+  /* background-color: red; */
+  margin: 0em auto 0em;
+  height: 32px;
+  width: 800px;
+  font-size: 14pt;
+	
+  /* color: gray; */
+  font-family: 'Roboto', cursive;
+}
+
+#formulario {
+	background: #eee;
+	max-height: 417px;
+	overflow: auto;
+	border-bottom: 2px double pink;
+}
+
+.tabs{
+	display: flex;
+	float: left;
+  background-color: gray;
+  margin: 0em auto 0.5em;
+  height: 32px;
+  width: 150px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 600;
+  font-size: 15pt;
+	border: 0px solid black;
+	border-radius: 8px 8px 0px 0px;
+	justify-content: center;
+	align-items: center;
+	
+}
+#tabEvolucao {
+	background-color: pink;
+  	margin: 0em auto 0.5em;
+  	width: 150px;
+}
+
+.ctthide{
+	display: none;
+}
+
+#converter {
+	display: none;
+	flex-flow: column;
+	width: 800px;
+	align-self: center;
+}
+
+#evolucao {
+	
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-self: center;
+	/*border: 0px solid red;
+	margin: 0em auto 0.5em;
+  	width: 800px;
+	*/
+}
+
+#resultadosBq {
+	display: block;
+  margin: auto;
+	background: #eee;
+	height: 250px;
+	width: 790px;
+	overflow: auto;
+}
+
+#textoResultados, #resultadosBq {
+	font-size: 16px;
+	text-align: left;
+	padding: 4px;
+}
+
+
+.evolucao {
+		/* background-color: gray; 
+		border: 1px solid red;
+		*/
+		width: 800px;
+}
+
+.tred{
+	color: red;
+	font-size: 16px;
+}
+.spacer{
+  display: block;
+	
+  /* background-color: red; */
+  margin: auto;
+  height: 50px;
+  width: 805px;
+  font-size: 14pt;
+	
+  /* color: gray; */
+  font-family: 'Roboto', cursive;
+  
+}
