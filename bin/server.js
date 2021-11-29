@@ -14,13 +14,13 @@ app.use(express.static(path.join(__dirname, '../app')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../app/index.html'));
   });
-  
 
-const newLocal = 8080;
-  app.listen(newLocal, () => console.log('Example app is listening on port 8080.'));
+app.listen(process.env.PORT || 3000, 
+  () => console.log('Example app is listening on port 8080.'));
 
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
+liveReloadServer.server.once("connection", 
+  () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/");
+    }, 100);
 });
