@@ -14,6 +14,7 @@ let buttonLimpa = document.getElementById("Limpa");
 let buttonLimpadados = document.getElementById('limpadados');
 let tabConverter = document.getElementById("tabConverter");
 let tabEvolucao = document.getElementById("tabEvolucao");
+let tabEntrevista = document.getElementById("tabEntrevista");
 const CACHE_NAME = 'JupiaData';
 
 const adolescenteBase = {
@@ -25,11 +26,12 @@ const adolescenteBase = {
 	atendimento: {
 		turno: "",
 		primeiroAtmCheck: false,
-		entrevista: false
+		entrevista: false,
+		atendimentoObs: ""
 	},
 	familia: {
 		famParentesco: "",
-		famObs: ""
+		familiaObs: ""
 	},
 	saude: {
 		dor: "",
@@ -37,13 +39,15 @@ const adolescenteBase = {
 		machucado: "",
 		remedio: "",
 		semDDMCheck: false,
-		gesauCheck: false
+		gesauCheck: false,
+		saudeObs: ""
 	},
 	convivencia: {
 		posneg: "",
 		positivaMas: "",
 		negativaObs: "",
-		gesegCheck: false
+		gesegCheck: false,
+		convivenciaObs: ""
 	},
 	visita: {
 		recebida: "",
@@ -51,13 +55,15 @@ const adolescenteBase = {
 		fatoVisita: "",
 		contatosimnao: "",
 		contatomeio: "",
-		contatoquem: ""
+		contatoquem: "",
+		visitaObs: ""
 	},
 	escolar: {
 	
 	},
 	tema: {
-		semana: ""
+		semana: "",
+		temaObs: ""
 	},
 	infracao: {
 	
@@ -79,7 +85,8 @@ let adolescente = adolescenteBase;
 let adolescentes = {
 	a: adolescente
 }
-const evolucaoDados = `${adolescente.dados.nome} recebeu atendimento técnico na ${adolescente.atendimento.turno} de hoje.`;
+const evolucaoDados = ``;
+let evolucaoSaude = [0,'','','',''];
 let assinaturaEvolucao = `<p>Juliana Ferreira, Pedagoga, Mat.: 217961-X, UIPSS.</p>`;
 const evolucaoBase = [evolucaoDados,"","","","","", assinaturaEvolucao];
 let evolucao = evolucaoBase;
@@ -92,7 +99,6 @@ function visitaOpen(pm){
   		}
 	}
 	if (document.getElementById(pm.visita[1]).checked) {
-		//console.log(elem[0].style.visibility);
 		for(i = 0; i < pm.ctthide.length; i++) {
     		pm.ctthide[i].style.display = pm.display[1];
   		}
@@ -101,44 +107,34 @@ function visitaOpen(pm){
 
 function checkCampos() {
 	//campos check
-	console.log(document.getElementById("nome").type);
-
 	document.getElementById("nome").value = adolescente.dados.nome;
 	document.getElementById("modulo").value = adolescente.dados.modulo;
 	document.getElementById("turno").value = adolescente.atendimento.turno;
 	
-	adolescente.atendimento.primeiroAtmCheck == true ? 
-	document.getElementById("primeiroAtmCheck").checked = true : console.log();
+	if (adolescente.atendimento.primeiroAtmCheck == true)
+		document.getElementById("primeiroAtmCheck").checked = true;
 
 	//saude check
-	adolescente.saude.semDDMCheck == true ? 
-	document.getElementById("semDDMCheck").checked = true : console.log();
+	if(adolescente.saude.semDDMCheck == true) {
+		document.getElementById("semDDMCheck").checked = true;
+		document.getElementById("dor").disabled = true;
+		document.getElementById("doenca").disabled = true;
+		document.getElementById("machucado").disabled = true;
+	}
 
-	adolescente.saude.dorCheck == true ? 
-	document.getElementById("dorCheck").checked = true : console.log();
-
-	adolescente.saude.doencaCheck == true ? 
-	document.getElementById("doencaCheck").checked = true : console.log();
-
-	adolescente.saude.machucadoCheck == true ? 
-	document.getElementById("machucadoCheck").checked = true : console.log();
-
-	adolescente.saude.remedioCheck == true ? 
-	document.getElementById("remedioCheck").checked = true : console.log();
-
-	adolescente.saude.gesauCheck == true ? 
-	document.getElementById("gesauCheck").checked = true : console.log();
-	
+	if (adolescente.saude.gesauCheck == true)
+	document.getElementById("gesauCheck").checked = true;
 
 	document.getElementById("dor").value = adolescente.saude.dor;
 	document.getElementById("doenca").value = adolescente.saude.doenca;
 	document.getElementById("machucado").value = adolescente.saude.machucado;
 	document.getElementById("remedio").value = adolescente.saude.remedio;
+	document.getElementById("saudeObs").value = adolescente.saude.saudeObs;
 
 	//tema check
-	//adolescente.tema.semana
 	document.getElementById("temas").value = adolescente.tema.semana;
-	
+	document.getElementById("temaObs").value = adolescente.tema.temaObs;
+
 	//visita check
 	adolescente.visita.recebida == "sim" ? 
 	document.getElementById("simVisita").checked = true : document.getElementById("naoVisita").checked = true;
@@ -168,7 +164,8 @@ function checkCampos() {
 		document.getElementById("convivencianeg").checked = true;
 		document.getElementById("negativaObs").value = adolescente.convivencia.negativaObs;
 	}
-	
+	document.getElementById("convivenciaObs").value = adolescente.convivencia.convivenciaObs;
+
 	//visita check
 	if (adolescente.visita.recebida == "sim") {
 		document.getElementById("simVisita").checked = true;
@@ -179,7 +176,6 @@ function checkCampos() {
 	else {
 		document.getElementById("naoVisita").checked = true;
 		document.getElementById("contatoquem").value = adolescente.visita.contatoquem;
-		console.log(adolescente.visita.contatomeio);
 		adolescente.visita.contatomeio == "chamada de vídeo" ? document.getElementById("contatomeiovideo").checked = true :
 		document.getElementById("contatomeiotel").checked = true;
 		if (adolescente.visita.contatosimnao == "nao") {
@@ -192,14 +188,14 @@ function checkCampos() {
 	
 	//ligação
 	document.getElementById("famParentesco").value = adolescente.familia.famParentesco;
-	document.getElementById("famObs").value = adolescente.familia.famObs;
+	document.getElementById("familiaObs").value = adolescente.familia.familiaObs;
 
 	//entrevista
 	document.getElementById("entrevistaCheck").checked = adolescente.atendimento.entrevista;
+	document.getElementById("atendimentoObs").value = adolescente.atendimento.atendimentoObs;
 }
 
 function resultadoUpdate(){
-	//console.log("teste", evolucao)
 	adolescentes.a = adolescente;
 	resultadoEvolucao =
 	`${evolucao[0]}
@@ -215,7 +211,7 @@ function resultadoUpdate(){
 	<p>${evolucao[5]}</p>
 
 	<p>${evolucao[6]}</p>`;
-	//console.log(resultadoEvolucao);
+	
 	document.getElementById("resultadosBq").innerHTML = resultadoEvolucao;
 	let temp = document.createElement("div");
 	temp.innerHTML = resultadoEvolucao;
@@ -225,7 +221,6 @@ function resultadoUpdate(){
 if (window.caches) {
 	
 	caches.has(CACHE_NAME).then(cache => {
-		//console.log('teste', cache);
 		if (cache === false) {
 			console.log("Não tem cache.");
 			caches.open(CACHE_NAME).then(cache => {
@@ -252,7 +247,7 @@ if (window.caches) {
 			caches.open(CACHE_NAME).then(cache => {
 				cache.match('/dataevo.json').then( res => {
 					res.json().then( res => {
-						let converted  = res;
+						let converted = res;
 						console.log('Cache 2 aberto.');
 						evolucao = converted;
 						resultadoUpdate();
@@ -322,55 +317,53 @@ buttonT2.addEventListener('click', function(){
   copyTextToClipboard(fraseConvertida);
 });
 
-
 buttonLimpa.addEventListener('click', function(){
   myInputa.value = '';
   myOutputa.value = '';
 });
 
-
-
 tabConverter.addEventListener('click', function(){
 	document.getElementById("evolucao").style.display = "none";
-  document.getElementById("converter").style.display = "flex";
+	document.getElementById("entrevista").style.display = "none";
+	document.getElementById("converter").style.display = "flex";
 });
 
 tabEvolucao.addEventListener('click', function(){
-  document.getElementById("evolucao").style.display = "inline-flex";
-  document.getElementById("converter").style.display = "none";
+	document.getElementById("evolucao").style.display = "inline-flex";
+	document.getElementById("converter").style.display = "none";
+	document.getElementById("entrevista").style.display = "none";
+});
+
+tabEntrevista.addEventListener('click', function(){
+	document.getElementById("evolucao").style.display = "none";
+	document.getElementById("converter").style.display = "none";
+	document.getElementById("entrevista").style.display = "inline-flex";
 });
 
 document.getElementById("textoResultados").innerHTML = evolucaoDados;
 
-/* 
-function check(dados) {
-	let list = [nome, turno, famTel, famObs];
-}
-*/
-
-function atualiza(dado,campo,valor) {
+function atualiza(dado,campo,valor="") {
 	if (dado=="dados" && campo[1] !== "" || campo[1]=="primeiroAtmCheck") {
 		if (campo[1]=="primeiroAtmCheck"){
 			adolescente.atendimento[campo[1]] = valor;
 		}
-		//console.log(adolescente);
 		adolescente[campo[0]][campo[1]] = valor;
 		evolucao[0] = `${adolescente.dados.nome} recebeu atendimento técnico na ${adolescente.atendimento.turno} de hoje.${document.getElementById("primeiroAtmCheck").checked ? `<p>Foi orientado quanto às regras de convivência da Unidade, a dinâmica de ligações, recebimento de pertences, visitas e audiências, bem como quanto à importância do correto uso da máscara em todos os espaços da UIPSS, para evitar a propagação da COVID-19.</p>` : ""}`;
 	}
+
 	if (dado=="familia" && campo[1] !== "") {
 		adolescente[campo[0]][campo[1]] = valor;
-		evolucao[4] = `Viabilizei contato telefônico entre o adolescente e ${adolescente.familia.famParentesco}. ${adolescente.familia.famObs}`;
+		evolucao[4] = `Viabilizei contato telefônico entre o adolescente e ${adolescente.familia.famParentesco}. ${adolescente.familia.familiaObs}`;
 	}
 	
 	if (dado=="visita" && campo[1] !== "") {
-		//console.log('a',campo.id, campo.classList[0], campo.classList[1]);
-		//[e.target.classList,e.target.id]
+		let obs;
 		let naoVisita = '';
+		let simVisita = '';
 		if (campo.classList[1] == "recebida"){
 			adolescente[campo.classList[0]][campo.classList[1]] = valor;
 		}
 		else if (campo.classList[1] == "contatomeio") {
-			//console.log(dado,campo[0][0], campo[1],valor);
 			adolescente[campo.classList[0]][campo.classList[1]] = valor;
 			
 		}
@@ -379,19 +372,19 @@ function atualiza(dado,campo,valor) {
 		}
 		else {
 			adolescente[campo.classList[0]][campo.id] = valor;
-			console.log('c',valor);
 		}
-
+		obs = ` ${adolescente.visita.visitaObs}`;
 		if (document.getElementById("simVisita").checked) {
-			evolucao[3] = `Conta que recebeu visita ${adolescente.visita.visitaquem} no último fim de semana.`;
+			simVisita = `Conta que recebeu visita ${adolescente.visita.visitaquem} no último fim de semana.`;
 			adolescente.visita.contatomeio = "";
 			adolescente.visita.contatosimnao = "";
 			adolescente.visita.contatoquem = "";
 			document.getElementById("contatoquem").value = "";
-		}
-
-		if (document.getElementById("fatoVisita").value !== "") {
-			evolucao[3] += ` Menciona que ${adolescente.visita.fatoVisita}.`
+			
+			if (document.getElementById("fatoVisita").value !== "")
+			simVisita += ` Menciona que ${adolescente.visita.fatoVisita}.`
+			
+			evolucao[3] = simVisita + obs;
 		}
 
 		if (document.getElementById("naoVisita").checked) {
@@ -403,48 +396,42 @@ function atualiza(dado,campo,valor) {
 
 			function contatosn(value) {
 				if (adolescente.visita.contatoquem !== "") {
-					console.log('s', value);
 					switch (value) {
-							
 							case "s":
-								console.log('t', value);
 								naoVisita += ` conversou com ${adolescente.visita.contatoquem}`;
 								break;
 							case "n":
-								console.log('f', value);
 								naoVisita += `, pois ${adolescente.visita.contatoquem}`;
 								break;
 						}
 				}
 				if (adolescente.visita.contatomeio !=='') {
-				switch (adolescente.visita.contatosimnao){
-					case "sim" :
-						naoVisita += ` por meio de ${adolescente.visita.contatomeio}`;
-						break;
-					case "nao":
-						naoVisita += ` não atendeu a ${adolescente.visita.contatomeio}`;
-						break;
+					switch (adolescente.visita.contatosimnao){
+						case "sim" :
+							naoVisita += ` por meio de ${adolescente.visita.contatomeio}`;
+							break;
+						case "nao":
+							naoVisita += ` não atendeu a ${adolescente.visita.contatomeio}`;
+							break;
+					}
 				}
-			}
 			}
 
 			if (document.getElementById("contatoNaoCheck").checked) {
-				naoVisita = `, e que`;
+				naoVisita = ` e que`;
 				naoVisita += ` não conseguiu contato com a família`;
 				contatosn("n");
-				
 			} 
 			else if (document.getElementById("contatoSimCheck").checked) {
-				console.log('aa');
-				naoVisita = `, e que`;
+				naoVisita = `, mas que`;
 				contatosn("s");
 			}
-			evolucao[3] += naoVisita + `.`;
+			evolucao[3] += naoVisita + `.` + obs;
 		}
+		
 	}
 	
 	if (dado=="convivencia"){
-		console.log(campo);
 		if (campo.name == "convivencia") {
 			adolescente.convivencia.posneg = valor;
 		}
@@ -471,87 +458,120 @@ function atualiza(dado,campo,valor) {
 			document.getElementById("geseglbl").style.color = "";
 			document.getElementById("positivaMas").value ="";
 			adolescente.convivencia.positivaMas = "";
-			evolucao[2] = `Declara que a convivência com os pares no Módulo ${adolescente.dados.modulo} não está saudável, uma vez que ${adolescente.convivencia.negativaObs}.${ document.getElementById("gesegCheck").checked ? `<br>Enviarei email à GESEG sobre o quadro apresentado.` : ""}`;
+			evolucao[2] = `Declara que a convivência com os pares no Módulo ${adolescente.dados.modulo} não está saudável, uma vez que ${adolescente.convivencia.negativaObs}.${ document.getElementById("gesegCheck").checked ? `<br>Enviarei email à GESEG informando a situação apresentada.` : ""}`;
 		}
-		//e.target.name == "convivencia" ? adolescente.convivencia.posneg = e.target.value :
-		//atualiza("convivencia",[e.target.className,e.target.id], e.target.value);
+		evolucao[2] += ` ${adolescente.convivencia.convivenciaObs}`;
 	}
-		
+	
 	if (dado=="saude") {
-		console.log(dado,campo[0][0], campo[1],valor);
-		if (valor == true){
+		//console.log(dado,campo[0], campo[1],valor);
+		if (valor === true){
 			adolescente.saude[campo[1]] = valor;
-		} else if (valor == false) {
+		} 
+		else if (valor === false) {
 			adolescente.saude[campo[1]] = valor;
-			const ifCondition = ["semDDMCheck","gesauCheck" ];
-			if (!ifCondition.includes(campo[1])) 
+			const ifCondition = ["semDDMCheck","gesauCheck"];
+			if (!ifCondition.includes(campo[1])){
 				adolescente[campo[0]][campo[1].match(/(^[a-z]+)/g)] = "";
 				document.getElementById(campo[1].match(/(^[a-z]+)/g)).value = "";
+			}
+			
 		}
 		adolescente[campo[0]][campo[1]] = valor;
 		
-		let evolucaoSaude = ``;
-		let saudeOk = `Nega dor, doença ou machucado.`;
-				
-		document.getElementById("semDDMCheck").checked ?
-			evolucaoSaude += `${saudeOk}`: evolucaoSaude += ``;
+		let {dor, doenca, machucado, remedio} = adolescente.saude;
+		const saudeEmpty = [dor, doenca, machucado, remedio];
+		
+		const evSaude =(n)=>{
+			evolucaoSaude[0] = saudeEmpty.findIndex(element => element !== '') + 1;
+			if (saudeEmpty.filter(item => item).length == 1 || evolucaoSaude[0] == n) {
+				evolucaoSaude[0] = n;
+				return `Quanto à saúde, afirma que `;
+			}
+			else {
+				return ` Afirma que `;
+			}
+		}
+		evolucaoSaude[1] = dor !== '' ? evSaude('1') + `${adolescente.saude.dor}.` : ``;
+		evolucaoSaude[2] = doenca !== '' ? evSaude('2') + `${adolescente.saude.doenca}.` : ``;
+		evolucaoSaude[3] = machucado !== '' ? evSaude('3') + `${adolescente.saude.machucado}.` : ``;
+		evolucaoSaude[4] = remedio !== '' ? ` Afirma que ` + `${adolescente.saude.remedio}.` : ``;
 
-		if (document.getElementById("dorCheck").checked) {
-			evolucaoSaude += ` Afirma que ${adolescente.saude.dor}.`;
+		evolucao[1] = evolucaoSaude.slice(1,5).join('') + ` ${adolescente.saude.saudeObs}`;
+		
+		if (document.getElementById("semDDMCheck").checked) {
+			adolescente.saude.dor ='';
+			adolescente.saude.doenca = '';
+			adolescente.saude.machucado='';
+			document.getElementById("dor").value = '';
+			document.getElementById("dor").disabled = true;
+			document.getElementById("doenca").value = '';
+			document.getElementById("doenca").disabled = true;
+			document.getElementById("machucado").value = '';
+			document.getElementById("machucado").disabled = true;
+			evolucao[1] = `Quanto à saúde, nega dor, doença ou machucado.` +
+				evolucaoSaude.slice(1,5).join('') + ` ${adolescente.saude.saudeObs}`;
 		}
-		if (document.getElementById("doencaCheck").checked) {
-			evolucaoSaude += ` Afirma que ${adolescente.saude.doenca}.`;
+		else {
+			document.getElementById("dor").disabled = false;
+			document.getElementById("doenca").disabled = false;
+			document.getElementById("machucado").disabled = false;
 		}
-		if (document.getElementById("machucadoCheck").checked) {
-			evolucaoSaude += ` Afirma que ${adolescente.saude.machucado}.`;
-		}
-		if (document.getElementById("remedioCheck").checked) {
-			evolucaoSaude += ` Expõe que toma ${adolescente.saude.remedio}.`;
-		}
-		if (document.getElementById("gesauCheck").checked) {
-			evolucaoSaude += `<br>Enviarei email à GESAU sobre o quadro de saúde informado.`;
-		}
-		evolucao[1] = evolucaoSaude;
+
+		if (document.getElementById("gesauCheck").checked) 
+			evolucao[1] += `<br>Encaminharei o adolescente à GESAU para avaliação do quadro de saúde apontado.`;
 	}
-	
-	if (dado == "entrevistaCheck"){
+
+	if (dado == "entrevistaCheck") {
+		if (campo.id==="atendimentoObs") {
+			adolescente.atendimento[campo.id] = valor.value;
+		}
 		adolescente.atendimento.entrevista = document.getElementById("entrevistaCheck").checked;
-	
-		evolucao[6] = `${document.getElementById("entrevistaCheck").checked ?
-		`Realizei entrevista que viabilizará construção de relatório avaliativo.
-		Os dados da entrevista encontram-se no SIPIA, nos campos próprios para tais. ${assinaturaEvolucao}` :
-		 `${assinaturaEvolucao}`}`;
+		if (document.getElementById("entrevistaCheck").checked) {
+			evolucao[6] = `${adolescente.atendimento.atendimentoObs}` + `<br><br>Realizei entrevista 
+			que viabilizará construção de relatório avaliativo.
+			Os dados da entrevista encontram-se no SIPIA, 
+			nos campos próprios para tais. ${assinaturaEvolucao}`
+		} else {
+			evolucao[6] = `${adolescente.atendimento.atendimentoObs}` + `${assinaturaEvolucao}`;
+		}
 	}
 
 	if (dado == "tema") {
-		adolescente.tema.semana = valor;
-		switch (adolescente.tema.semana) {
-			case 's1':
-				evolucao[5] = `Trabalhamos os subtemas da Semana 1, do Plano de Atendimento Socioeducativo da equipe 
-				técnica do Módulo 04, "Conhecendo seus direitos, entendendo a internação provisória e diagnosticando 
-				suas demandas mais urgentes."`;
-				break;
-			case 's2': 
-				evolucao[5] = `Trabalhamos os subtemas da Semana 2, do Plano de Atendimento Socioeducativo da equipe 
-				técnica do Módulo 04, "Seu lugar na Família."`;
-				break;
-			case 's3':
-				evolucao[5] = `Trabalhamos os subtemas da Semana 3, do Plano de Atendimento Socioeducativo da equipe 
-				técnica do Módulo 04, "Seu lugar na escola, o poder transformador da educação e o despertar para a 
-				profissionalização e o ingresso no mercado de trabalho."`;
-				break;
-			case 's4':
-				evolucao[5] = `Trabalhamos os subtemas da Semana 4, do Plano de Atendimento Socioeducativo da equipe 
-				técnica do Módulo 04, "Seu lugar na vizinhança, comunidade, sociedade e aprendendo sobre empatia."`;
-				break;
-			case 's5':
-				evolucao[5] = `Trabalhamos os subtemas da Semana 5, do Plano de Atendimento Socioeducativo da equipe 
-				técnica do Módulo 04, "Amor próprio, saúde e projeto de vida."`;
-				break;
-			default:
-				evolucao[5] = '';
-				break;
+		let evolucaoTema;
+		if (campo.id==="temaObs") {
+			adolescente.tema[campo.id] = valor.value;
+		} else {
+			adolescente.tema.semana = valor.options[valor.selectedIndex].value;
 		}
+			switch (adolescente.tema.semana) {
+				case 's1':
+					evolucaoTema = `Trabalhamos os subtemas da Semana 1, do Plano de Atendimento Socioeducativo da equipe 
+					técnica do Módulo 04, "Conhecendo seus direitos, entendendo a internação provisória e diagnosticando 
+					suas demandas mais urgentes."`;
+					break;
+				case 's2': 
+					evolucaoTema = `Trabalhamos os subtemas da Semana 2, do Plano de Atendimento Socioeducativo da equipe 
+					técnica do Módulo 04, "Seu lugar na Família."`;
+					break;
+				case 's3':
+					evolucaoTema = `Trabalhamos os subtemas da Semana 3, do Plano de Atendimento Socioeducativo da equipe 
+					técnica do Módulo 04, "Seu lugar na escola, o poder transformador da educação e o despertar para a 
+					profissionalização e o ingresso no mercado de trabalho."`;
+					break;
+				case 's4':
+					evolucaoTema = `Trabalhamos os subtemas da Semana 4, do Plano de Atendimento Socioeducativo da equipe 
+					técnica do Módulo 04, "Seu lugar na vizinhança, comunidade, sociedade e aprendendo sobre empatia."`;
+					break;
+				case 's5':
+					evolucaoTema = `Trabalhamos os subtemas da Semana 5, do Plano de Atendimento Socioeducativo da equipe 
+					técnica do Módulo 04, "Amor próprio, saúde e projeto de vida."`;
+					break;
+				default:
+					evolucaoTema = '';
+					break;
+			}
+		evolucao[5] = evolucaoTema + ` ${adolescente.tema.temaObs}`;
 	}
 	cacheSave();
 	resultadoUpdate();
@@ -561,7 +581,6 @@ function atualiza(dado,campo,valor) {
 document.getElementById("formDados").addEventListener('change', function(e){
 	e.target.type == "checkbox" ? atualiza("dados",[e.target.className,e.target.id], e.target.checked):
 	atualiza("dados",[e.target.className,e.target.id], e.target.value);
-	//console.log(adolescente.dados, evolucaoBase,e.target.id, e.target.value);
 });
 
 // SAUDE
@@ -572,18 +591,13 @@ document.getElementById("formSaude").addEventListener('change', function(e){
 
 // CONVIVENCIA
 document.getElementById("formConv").addEventListener('change', function(e){
-	//atualiza("convivencia",[e.target.className,e.target.id], e.target.value);
-	//console.log(adolescente.convivencia, e.target.name, e.target.id, e.target.value);
 	atualiza("convivencia", e.target, e.target.value);
 });
 
 //TEMA DA SEMANA
 document.getElementById("formTema").addEventListener('change', function(e){
-	console.log(e.target.options[e.target.selectedIndex].value);
-	atualiza("tema", e.target, e.target.options[e.target.selectedIndex].value);
+	atualiza("tema", e.target, e.target);
 });
-
-
 
 // VISITA
 document.getElementById("formVisita").addEventListener('change', function(e){
@@ -602,7 +616,7 @@ document.getElementById("formFamilia").addEventListener('keyup', function(e){
 
 // ENTREVISTA
 document.getElementById("formEntrevista").addEventListener('change', function(e){
-	atualiza("entrevistaCheck",[e.target.className,e.target.id], e.target.value);
+	atualiza("entrevistaCheck", e.target, e.target);
 });
 
 buttonLimpadados.addEventListener('click', function(){

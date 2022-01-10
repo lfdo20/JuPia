@@ -11,206 +11,241 @@
 </head>
 <body>
 
-  <div id="all">
-  <div id="sipia">
-    Ju PIA
-  </div>
+<div id="all">
+	<div id="sipia">
+		Ju PIA
+	</div>
 	<div id="selector">
-		<div id="tabEntrevista" class="tabs">
+		<div id="tabEntrevista" tabindex='1' class="tabs">
 			Entrevista
 		</div>
-		<div id="tabEvolucao" class="tabs">
+		<div id="tabEvolucao" tabindex='2' class="tabs">
 			Evolução
 		</div>
-		<div id="tabConverter" class="tabs">
+		<div id="tabConverter" tabindex='3' class="tabs">
 			Converter
 		</div>
 	</div>
-  <div id="converter">
+	<div id="converter">
 		<div id="inputo">
 			<textarea id="inputa" rows="6" type="text"></textarea>
-			<div class="spacer">
-				Caracteres : <input id="caracsAntes">
-				<button id="T1">1</button>
-				<button id="T2">2</button>
-				<!--<button id="T3">3</button>-->
-				<button id="Limpa">Limpa</button>
-			</div>
-		</div>  
+		</div>
+		<div class="spacer">
+			<label>Caracteres :</label>
+			<input id="caracsAntes">
+			<button id="T1">1</button>
+			<button id="T2">2</button>
+			<!--<button id="T3">3</button>-->
+			<button id="Limpa">Limpa</button>
+		</div>
 		<div id="outputo">
 			<textarea id="outputa" rows="6" type="text"></textarea>
-			<div class="spacer">
-				Caracteres : <input id="caracsDepois"> 
-			</div> 
-		</div> 
-  </div>
+		</div>
+		<div class="spacer">
+			<label>Caracteres :</label>
+			<input id="caracsDepois">
+		</div>
+	</div>
 	<div id="evolucao">
-			<div id="formulario" class="evolucao">
-				<details id="formDados" class="collapse" open>
-					<summary class="title ttl1">Dados</summary>
+		<div id="formulario" class="evolucao">
+			<details id="formDados" class="collapse" open>
+				<summary class="title ttl1">Dados</summary>
+				<form>
+					<div class="formline">
+						<label class="dados">Nome:</label>
+						<input id="nome" class="dados">
+						<label class="dados">Modulo:</label>
+						<input id="modulo" class="dados">
+						<label class="dados">Turno:</label>
+						<input id="turno" class="atendimento">
+					</div>
+					<div class="formline">
+						<input type="checkbox" name="dados" id="primeiroAtmCheck" class="dados">
+						<label class="dados">Foi orientado em primeiro atendimento.</label>
+					</div>
+				</form>
+			</details>
+			
+			<details id="formSaude" class="collapse">
+				<summary class="title ttl2">Saúde</summary>
 					<form>
 						<div class="formline">
-							<label class="dados">Nome:</label>
-							<input id="nome" class="dados">
-							<label class="dados">Modulo:</label>
-							<input id="modulo" class="dados">
-							<label class="dados">Turno:</label>
-							<input id="turno" class="atendimento">
+							<input type="checkbox" name="saude" id="semDDMCheck" class="saude">
+							<label class="saude ok">Sem dor, doença, machucado.</label>
 						</div>
 						<div class="formline">
-							<input type="checkbox" name="dados" id="primeiroAtmCheck" class="dados">
-							<label class="dados">Foi orientado em primeiro atendimento.</label>
+							<label class="saude">Dor . . . . . . . . .</label>
+							<input id="dor" class="saude">
+						</div>
+						<div class="formline">
+							<label class="saude">Doença . . . . . .</label>
+							<input id="doenca" class="saude" >
+						</div>
+						<div class="formline">
+							<label class="saude">Machucado . . .</label>
+							<input id="machucado" class="saude">
+						</div>
+						<div class="formline">
+							<label class="saude">Remédio . . . . .</label> 
+							<input id="remedio" class="saude">
+						</div>
+						<div class="formline">
+							<input type="checkbox" name="saude" id="gesauCheck" class="saude" value="gesau">
+							<label id="gesaulbl" class="saude">GESAU</label>
+						</div>
+						<div class="formline obstext">
+							<textarea id="saudeObs" class="saude" placeholder="Observações"></textarea>
 						</div>
 					</form>
-					
-				</details>
-				
-				<details id="formSaude" class="collapse">
-					<summary class="title ttl2">Saúde</summary>
-						<form>
+			</details>
+			
+			<details id="formConvivencia" class="collapse">
+				<summary class="title ttl3">Convivência</summary>
+					<form id="formConv">
+						<div class="formline">
+							<input type="radio" name="convivencia" id="convivenciapos" class="convivencia" value="positiva">
+							<label class="convivencia">Positiva . . . mas </label>
+							<input id="positivaMas" class="convivencia">
+						</div>
+						<div class="formline">
+							<input type="radio" name="convivencia" id="convivencianeg" class="convivencia" value="negativa">
+							<label class="convivencia">Negativa . . . .</label>
+							<textarea id="negativaObs" class="convivencia"></textarea>
+						</div>
+						<div class="formline">
+							<input type="checkbox" name="gesegCheck" id="gesegCheck" class="convivencia" value="geseg">
+							<label class="convivencia" id="geseglbl">GESEG</label>
+						</div>
+						<div class="formline obstext">
+							<textarea id="convivenciaObs" class="convivencia" placeholder="Observações"></textarea>
+						</div>
+					</form>
+			</details>
+			
+			<details id="formVisita" class="collapse">
+				<summary class="title ttl4">Visita</summary>
+					<form>
+						<div class="formline">
 							<div class="formline">
-								<input type="checkbox" name="saude" id="semDDMCheck" class="saude">
-								<label class="saude ok">Sem dor, doença, machucado.</label>
+								<input type="radio" name="visita" id="simVisita" class="visita recebida" value="sim">
+								<label class="visita">Recebeu visita</label>
+							</div>
+							<div class="formline flv1">
+								<label class="visita flv2">De quem:</label>
+								<input id="visitaquem" class="visita">
+							</div>
+							<div class="formline flv1">
+								<label class="visita flv2">Fato visita:</label>
+								<textarea id="fatoVisita" class="visita"></textarea>
 							</div>
 							<div class="formline">
-								<input type="checkbox" name="saude" id="dorCheck" class="saude" value="dor">
-								<label class="saude">Dor . . . . . . . . .</label>
-								<input id="dor" class="saude">
+								<input type="radio" name="visita" id="naoVisita" class="visita recebida" value="nao">
+								<label class="visita">Não recebeu visita</label>
 							</div>
-							<div class="formline">
-								<input type="checkbox" name="saude" id="doencaCheck" class="saude" value="doenca">
-								<label class="saude">Doença . . . . . .</label>
-								<input id="doenca" class="saude" >
+							<div class="formline flv1 ctthide">
+								<input type="radio" name="contato" id="contatoNaoCheck" class="visita contatosimnao" value="nao">
+								<label class="visita" id="contatonaolbl">Não teve contato com familiar</label>
 							</div>
-							<div class="formline">
-								<input type="checkbox" name="saude" id="machucadoCheck" class="saude" value="machucado">
-								<label class="saude">Machucado . . .</label>
-								<input id="machucado" class="saude">
+							<div class="formline flv1 ctthide" id="contato">
+								<input type="radio" name="contato" id="contatoSimCheck" class="visita contatosimnao" value="sim">
+								<label class="visita" id="contatosimlbl">Teve contato familiar... com:</label>
+								<input id="contatoquem" class="visita">
 							</div>
-							<div class="formline">
-								<input type="checkbox" name="saude" id="remedioCheck" class="saude" value="remedio">
-								<label class="saude">Remédio . . . . .</label> 
-								<input id="remedio" class="saude">
+							<div class="formline flv3 ctthide">
+								<input type="radio" name="contatomeio" id="contatomeiovideo" class="visita contatomeio" value="chamada de vídeo">
+								<label class="visita">Chamada de vídeo</label>
 							</div>
-							<div class="formline">
-								<input type="checkbox" name="saude" id="gesauCheck" class="saude" value="gesau">
-								<label class="saude">GESAU</label>
+							<div class="formline flv3 ctthide">
+								<input type="radio" name="contatomeio" id="contatomeiotel" class="visita contatomeio" value="ligação telefônica">
+								<label class="visita">Ligação telefônica</label>
 							</div>
-						</form>
-				</details>
-				
-				<details id="formConvivencia" class="collapse">
-					<summary class="title ttl3">Convivência</summary>
-						<form id="formConv">
-							<div class="formline">
-								<input type="radio" name="convivencia" id="convivenciapos" class="convivencia" value="positiva">
-								<label class="convivencia">Positiva . . . mas </label>
-								<input id="positivaMas" class="convivencia">
+							<div class="formline obstext">
+								<textarea id="visitaObs" class="visita" placeholder="Observações"></textarea>
 							</div>
-							<div class="formline">
-								<input type="radio" name="convivencia" id="convivencianeg" class="convivencia" value="negativa">
-								<label class="convivencia">Negativa . . . .</label>
-								<textarea id="negativaObs" class="convivencia"></textarea>
-							</div>
-							<div class="formline">
-								<input type="checkbox" name="gesegCheck" id="gesegCheck" class="convivencia" value="geseg">
-								<label class="convivencia" id="geseglbl">GESEG</label>
-							</div>
-						</form>
-				</details>
+						</div>
+					</form>
+			</details>
+			
+			<details id="formFamilia" class="collapse">
+				<summary class="title ttl5">Ligação</summary>
+					<form>
+						<div class="formline">
+							<label class="labelLigacao">Parentesco:</label>
+							<input id="famParentesco" placeholder="a vó, o pai" class="familia">
+						</div>
+						<div class="formline obstext">
+							<textarea id="familiaObs" class="familia" placeholder="Observações"></textarea>
+						</div>
+					</form>
+			</details>
 
-				<details id="formTema" class="collapse">
-					<summary class="title ttl6">Tema da Semana</summary>
-					<form>
-						<div class="formline">
-							<label class="convivencia">Semana do tema :</label>
-							<select name="tema" id="temas">
-								<option value="">Selecione</option>
-								<option value="s1">Semana 1</option>
-								<option value="s2">Semana 2</option>
-								<option value="s3">Semana 3</option>
-								<option value="s4">Semana 4</option>
-								<option value="s5">Semana 5</option>
-							</select>
-						</div>
-					</form>
-				</details>
-				
-				<details id="formVisita" class="collapse">
-					<summary class="title ttl4">Visita</summary>
-						<form>
-							<div class="formline">
-								<div class="formline">
-									<input type="radio" name="visita" id="simVisita" class="visita recebida" value="sim">
-									<label class="visita">Recebeu visita</label>
-								</div>
-								<div class="formline flv1">
-									<label class="visita flv2">De quem:</label>
-									<input id="visitaquem" class="visita">
-								</div>
-								<div class="formline flv1">
-									<label class="visita flv2">Fato visita:</label>
-									<textarea id="fatoVisita" class="visita"></textarea>
-								</div>
-								<div class="formline">
-									<input type="radio" name="visita" id="naoVisita" class="visita recebida" value="nao">
-									<label class="visita">Não recebeu visita</label>
-								</div>
-								<div class="formline flv1 ctthide">
-									<input type="radio" name="contato" id="contatoNaoCheck" class="visita contatosimnao" value="nao">
-									<label class="visita" id="contatonaolbl">Não teve contato com familiar</label>
-								</div>
-								<div class="formline flv1 ctthide" id="contato">
-									<input type="radio" name="contato" id="contatoSimCheck" class="visita contatosimnao" value="sim">
-									<label class="visita" id="contatosimlbl">Teve contato familiar... com:</label>
-									<input id="contatoquem" class="visita">
-								</div>
-								<div class="formline flv3 ctthide">
-									<input type="radio" name="contatomeio" id="contatomeiovideo" class="visita contatomeio" value="chamada de vídeo">
-									<label class="visita">Chamada de vídeo</label>
-								</div>
-								<div class="formline flv3 ctthide">
-									<input type="radio" name="contatomeio" id="contatomeiotel" class="visita contatomeio" value="ligação telefônica">
-									<label class="visita">Ligação telefônica</label>
-								</div>
-							</div>
-						</form>
-				</details>
-				
-				<details id="formFamilia" class="collapse">
-					<summary class="title ttl5">Ligação</summary>
-						<form>
-							<div class="formline">
-								<label class="labelLigacao">Parentesco:</label>
-								<input id="famParentesco" placeholder="a vó, o pai" class="familia">
-							</div>
-							<div class="formline">
-								<label class="labelLigacao">Observação:</label>
-								<textarea id="famObs" class="familia"></textarea>
-							</div>
-						</form>
-				</details>
-				<form id="formEntrevista">
+			<details id="formTema" class="collapse">
+				<summary class="title ttl6">Tema da Semana</summary>
+				<form>
+					<div class="formline">
+						<label class="tema">Semana do tema :</label>
+						<select name="tema" id="temas">
+							<option value="">Selecione</option>
+							<option value="s1">Semana 1</option>
+							<option value="s2">Semana 2</option>
+							<option value="s3">Semana 3</option>
+							<option value="s4">Semana 4</option>
+							<option value="s5">Semana 5</option>
+						</select>
+					</div>
+					<div class="formline obstext">
+						<textarea id="temaObs" class="tema" placeholder="Observações"></textarea>
+					</div>
+				</form>
+			</details>
+			<form id="formEntrevista">
 				<div class="formline">
+					<div class="formline obstext">
+						<textarea id="atendimentoObs" class="atendimento" placeholder="Observações"></textarea>
+					</div>
 					<input type="checkbox" name="entrevista" id="entrevistaCheck" class="entrevista" value="entrevista">
 					<label class="entrevista" id="entrevistalbl">Realizei entrevista.</label>
 				</div>
-				</form>	
-
-				
-				
-				<div style="height:77px;">				</div>
-			</div>
-			
-			<div id="results" class="evolucao">
-				<blockquote contenteditable="true" id="resultadosBq">
-					<texto id="textoResultados"></texto>
-				</blockquote>
-				<div class="spacer">
-					<button id="limpadados">Limpa Dados</button>
-				</div>
+			</form>
+			<div style="height:77px;">
 			</div>
 		</div>
-  </div>
+		<div id="results" class="evolucao">
+			<blockquote contenteditable="true" id="resultadosBq">
+				<texto id="textoResultados"></texto>
+			</blockquote>
+			<div id="spacerevo"class="spacer">
+				<button id="limpadados">Limpa Dados</button>
+			</div>
+		</div>
+	</div>
+	<div id="entrevista">
+		<div id="formulario" class="entrevista">
+			<details id="formEnDados" class="collapse" open>
+				<summary class="title ttl1">Dados Completos</summary>
+				<form>
+					<div class="formline">
+						<label class="dados">Nome:</label>
+						<input id="nome" class="dados">
+						<label class="dados">Idade:</label>
+						<input id="idade" class="dados">
+						<label class="dados">Genitora:</label>
+						<input id="genitora" class="dados">
+						<label class="dados">Entrada:</label>
+						<input id="dataEntrada" class="dados">
+						<label class="dados">Modulo:</label>
+						<input id="modulo" class="dados">
+						<label class="dados">Turno:</label>
+						<input id="turno" class="atendimento">
+					</div>
+					<div class="formline">
+						<input type="checkbox" name="dados" id="primeiroAtmCheck" class="dados">
+						<label class="dados">Foi orientado em primeiro atendimento.</label>
+					</div>
+				</form>
+			</details>
+		</div>
+	</div>
+</div>
 </body>
 </html>

@@ -6,13 +6,13 @@
 	},
 	"atendimento": {
 		"turno": "",
-		"primeiroAtmCheck": "",
-		"entrevista": false
+		"primeiroAtmCheck": false,
+		"entrevista": false,
+		"atendimentoObs": ""
 	},
 	"familia": {
 		"famParentesco": "",
-		"famTel": "",
-		"famObs": ""
+		"familiaObs": ""
 	},
 	"saude": {
 		"dor": "",
@@ -20,13 +20,15 @@
 		"machucado": "",
 		"remedio": "",
 		"semDDMCheck": false,
-		"gesauCheck": false
+		"gesauCheck": false,
+		"saudeObs": ""
 	},
 	"convivencia": {
 		"posneg": "",
 		"positivaMas": "",
 		"negativaObs": "",
-		"gesegCheck": false
+		"gesegCheck": false,
+		"convivenciaObs": ""
 	},
 	"visita": {
 		"recebida": "",
@@ -34,18 +36,29 @@
 		"fatoVisita": "",
 		"contatosimnao": "",
 		"contatomeio": "",
-		"contatoquem": ""
+		"contatoquem": "",
+		"visitaObs": ""
 	},
 	"escolar": {
 	
 	},
 	"tema": {
-		"semana": ""
+		"semana": "",
+		"temaObs": ""
 	},
 	"infracao": {
 	
 	},
 	"ocorrencias": {
 	
+	},
+	"entrevista" : {
+		"impressoes":{},
+		"atoInfracional": {},
+		"familia": {},
+		"trabalho": {},
+		"escola": {},
+		"drogas":{},
+		"parecer": {}
 	}
 }
